@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AutoVision - ANPR System</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="scanline"></div>
+<div class="bg-overlay"></div>
+
+<header>
+  <div class="logo">
+    <span class="logo-icon">◈</span>
+    AUTO<span class="logo-accent">VISION</span>
+  </div>
+  <nav>
+    <a href="#" onclick="showSection('home')" class="nav-link active" id="nav-home">HOME</a>
+    <a href="#" onclick="showSection('scan')" class="nav-link" id="nav-scan">SCAN</a>
+    <a href="#" onclick="showSection('history')" class="nav-link" id="nav-history">HISTORY</a>
+  </nav>
+  <div class="status-pill">
+    <span class="status-dot"></span> SYSTEM ONLINE
+  </div>
+</header>
+
+<!-- HOME -->
+<section id="home" class="section active">
+  <div class="home-hero">
+    <p class="home-tag">[ ANPR v1.0 — POWERED BY EASYOCR + OPENCV ]</p>
+    <h1>Automatic<br><span class="accent">Number Plate</span><br>Recognition</h1>
+    <p class="home-sub">Upload a vehicle image. Our computer vision pipeline detects the plate, extracts text via OCR, and retrieves vehicle info from the database.</p>
+    <div class="home-buttons">
+      <button class="btn-primary" onclick="showSection('scan')">▶ START SCANNING</button>
+      <button class="btn-ghost" onclick="showSection('history')">VIEW HISTORY</button>
+    </div>
+  </div>
+  <div class="home-stats">
+    <div class="stat-box"><div class="stat-num">11</div><div class="stat-label">Vehicles in DB</div></div>
+    <div class="stat-box"><div class="stat-num">EasyOCR</div><div class="stat-label">OCR Engine</div></div>
+    <div class="stat-box"><div class="stat-num">OpenCV</div><div class="stat-label">Vision Pipeline</div></div>
+    <div class="stat-box"><div class="stat-num">FastAPI</div><div class="stat-label">Backend</div></div>
+  </div>
+</section>
+
+<!-- SCAN -->
+<section id="scan" class="section">
+  <div class="section-header">
+    <span class="section-tag">PLATE DETECTION</span>
+    <h2>Upload Vehicle Image</h2>
+  </div>
+
+  <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imageInput').click()">
+    <input type="file" id="imageInput" accept="image/*" style="display:none" onchange="previewFile(event)">
+    <div class="upload-icon">⬆</div>
+    <p class="upload-text">Click to upload or drag & drop</p>
+    <p class="upload-sub">JPG, PNG supported</p>
+  </div>
+
+  <div id="previewWrap" class="preview-wrap hidden">
+    <img id="previewImg" src="" alt="Preview">
+    <button class="btn-clear" onclick="clearImage()">✕ Clear</button>
+  </div>
+
+  <button class="btn-primary scan-btn" onclick="uploadImage()">◈ DETECT PLATE</button>
+
+  <div id="loading" class="loader hidden">
+    <div class="loader-bar"></div>
+    <p class="loader-text">Analyzing image...</p>
+  </div>
+
+  <div id="result" class="result-card hidden">
+    <div class="result-header">
+      <span class="result-tag">RESULT</span>
+      <span id="statusBadge" class="badge"></span>
+    </div>
+
+    <div class="plate-display">
+      <div class="plate-label">DETECTED PLATE</div>
+      <div class="plate-number" id="plate">—</div>
+    </div>
+
+    <div class="result-grid" id="vehicleInfo"></div>
+
+    <div id="notFoundMsg" class="not-found hidden">
+      ⚠ Plate not found in database. Raw OCR output shown above.
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section id="history" class="section">
+  <div class="section-header">
+    <span class="section-tag">LOG</span>
+    <h2>Scan History</h2>
+  </div>
+  <div id="historyContainer" class="history-container">
+    <p class="empty-msg">No scans yet. Go to SCAN to get started.</p>
+  </div>
+</section>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
