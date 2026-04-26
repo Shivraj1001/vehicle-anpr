@@ -88,27 +88,33 @@ def enhance_plate_for_ocr(plate_image: np.ndarray) -> np.ndarray:
 
 
 def clean_plate_text(raw_text: str) -> str:
-    """
-    Clean up OCR output to extract a valid Indian number plate format.
-    Indian plates follow: XX00XX0000 (e.g. MH12AB1234)
-    """
-    # Remove spaces, newlines, special characters
     cleaned = raw_text.replace(" ", "").replace("\n", "").upper()
-
-    # Remove common OCR noise characters
     cleaned = re.sub(r'[^A-Z0-9]', '', cleaned)
 
-    # Try to find an Indian plate pattern within the text
-    # Pattern: 2 letters + 2 digits + 2 letters + 4 digits
+    if cleaned.startswith("IND"):
+        cleaned = cleaned[3:]
+
+    corrected = list(cleaned)
+    digit_positions = [2, 3, 6, 7, 8, 9]
+    letter_positions = [0, 1, 4, 5]
+
+    for i in digit_positions:
+        if i < len(corrected):
+            corrected[i] = corrected[i].replace('I', '1').replace('O', '0').replace('S', '5').replace('B', '8')
+
+    for i in letter_positions:
+        if i < len(corrected):
+            corrected[i] = corrected[i].replace('0', 'O').replace('1', 'I').replace('8', 'B')
+
+    cleaned = ''.join(corrected)
+
     pattern = r'[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}'
     match = re.search(pattern, cleaned)
 
     if match:
         return match.group()
 
-    # If no clean pattern found, return whatever we have (trimmed)
     return cleaned[:15] if len(cleaned) > 15 else cleaned
-
 
 def extract_plate_text(image_bytes: bytes) -> dict:
     """
