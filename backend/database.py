@@ -7,9 +7,9 @@ VEHICLE_DATABASE = {
     "DL01IJ7890": {"owner": "Vikram Singh", "vehicle": "Tata Nexon", "color": "Red", "year": 2023, "state": "Delhi", "status": "Valid", "fuel_type": "Electric"},
     "MH20KL2345": {"owner": "Neha Joshi", "vehicle": "Maruti Suzuki Baleno", "color": "Orange", "year": 2021, "state": "Maharashtra", "status": "Expired", "fuel_type": "Petrol"},
     "GJ01MN6789": {"owner": "Ravi Mehta", "vehicle": "Kia Seltos", "color": "Black", "year": 2022, "state": "Gujarat", "status": "Valid", "fuel_type": "Petrol"},
-    "TN09OP0123": {"owner": "Lakshmi Iyer", "vehicle": "Hyundai i20", "color": "White", "year": 2020, "state": "Tamil Nadu", "status": "Valid", "fuel_type": "Petrol"},
+    "MH12CY1987": {"owner": "Lakshmi Iyer", "vehicle": "Hyundai i20", "color": "White", "year": 2020, "state": "Tamil Nadu", "status": "Valid", "fuel_type": "Petrol"},
     "MH02QR4567": {"owner": "Sanjay Kulkarni", "vehicle": "Mahindra Scorpio", "color": "Brown", "year": 2018, "state": "Maharashtra", "status": "Valid", "fuel_type": "Diesel"},
-    "UP32ST8901": {"owner": "Anjali Gupta", "vehicle": "Renault Kwid", "color": "Yellow", "year": 2019, "state": "Uttar Pradesh", "status": "Expired", "fuel_type": "Petrol"},
+    "MH12AB1003": {"owner": "Anjali Gupta", "vehicle": "Renault Kwid", "color": "Yellow", "year": 2019, "state": "Uttar Pradesh", "status": "Expired", "fuel_type": "Petrol"},
 }
 
 def lookup_vehicle(plate_number: str) -> dict:
